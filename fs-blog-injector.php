@@ -15,7 +15,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /* FreshySites Blog Injector Start */
 //______________________________________________________________________________
+add_action( 'loop_start', 'wpse_141253_loop_start' );
 
+function wpse_141253_loop_start( $query )
+{
+    if( $query->is_main_query() )
+    {
+        add_filter( 'the_content', 'wpse_141253_the_content' );
+        add_action( 'loop_end', 'wpse_141253_loop_end' );
+    }
+}
+
+function wpse_141253_the_content( $content )
+{
+    static $nr = 0;
+
+    if( 0 === ++$nr % 4 )
+        $content .= '<div style="margin-top:25px; margin-bottom:25px; clear:both;"><img src="https://freshysites.com/wp-content/uploads/fs-formal-horizontal.svg" width="100%"></div>';
+
+    return $content;
+}
+
+function wpse_141253_loop_end()
+{
+    remove_action( 'the_post', 'wpse_141253_the_content' );
+}
 
 //______________________________________________________________________________
 // All About Updates
