@@ -15,18 +15,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /* FreshySites Blog Injector Start */
 //______________________________________________________________________________
-add_action( 'loop_start', 'wpse_141253_loop_start' );
+add_action( 'loop_start', 'fs_890531_loop_start' );
 
-function wpse_141253_loop_start( $query )
+function fs_890531_loop_start( $query )
 {
     if( $query->is_main_query() )
     {
-        add_filter( 'the_content', 'wpse_141253_the_content' );
-        add_action( 'loop_end', 'wpse_141253_loop_end' );
+        add_filter( 'the_content', 'fs_890531_the_content' );
+        add_action( 'loop_end', 'fs_890531_loop_end' );
     }
 }
 
-function wpse_141253_the_content( $content )
+function fs_890531_the_content( $content )
 {
     static $nr = 0;
 
@@ -36,9 +36,9 @@ function wpse_141253_the_content( $content )
     return $content;
 }
 
-function wpse_141253_loop_end()
+function fs_890531_loop_end()
 {
-    remove_action( 'the_post', 'wpse_141253_the_content' );
+    remove_action( 'the_post', 'fs_890531_the_content' );
 }
 
 //______________________________________________________________________________
